@@ -30,7 +30,7 @@ if (!is_null($events['events'])) {
 			$res = json_decode($response);
 
 			foreach ($res as $kks => $value) {
-				$reply .= $value->code .'='. $value->name .' ('. $value->discipline .")\r\n";
+				$reply .= $value->code .'='. $value->name ."\r\n";
 			}
 
 

@@ -18,7 +18,7 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 			
 
-			$url = "https://cid-egat.firebaseio.com/KKS.json?orderBy=%22code%22&startAt=%22UR%22&endAt=%22UR\uf8ff%22";
+			$url = "https://cid-egat.firebaseio.com/KKS.json?orderBy=%22code%22&startAt=%22".$text."%22&endAt=%22".$text."\uf8ff%22";
 			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);

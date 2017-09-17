@@ -17,12 +17,29 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 			
+
+			$url = "https://cid-egat.firebaseio.com/KKS.json?orderBy=%22code%22&startAt=%22UR%22&endAt=%22UR\uf8ff%22";
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+			curl_setopt($ch, CURLOPT_USERPWD, "{YOUR NETPIE.IO APP KEY}:{YOUR NETPIE.IO APP SECRET}");
+			$response = curl_exec($ch); 
+			curl_close ($ch);
+			$res = json_decode($response);
+
+			foreach ($res as $kks => $value) {
+				$reply .= $value->code .'='. $value->name .' ('. $value->discipline .")\r\n";
+			}
+
+
+			// Repy back
 			$messages = [
 				'type' => 'text',
-				'text' => $text
+				'text' => $reply
 			];
 		  
-
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
